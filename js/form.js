@@ -8,7 +8,6 @@ button.addEventListener("click", function(event){
     var pacienteTr = construirTr(paciente);
 
     var errores = validarPaciente(paciente);
-    console.log(errores)
 
     if( errores.length>0){
         exhibirMensajesErrores(errores);
@@ -18,6 +17,9 @@ button.addEventListener("click", function(event){
     var talba = document.querySelector("#tabla-pacientes");
     talba.appendChild(pacienteTr);
     form.reset();
+    var mensajesErrorres= document.querySelector("#mensajesError");
+    mensajesErrorres.innerHTML="";
+
 });
 
 function capturarDatosPaciente(form){
@@ -46,7 +48,9 @@ function construirTr(paciente){
 }
 
 function construirTd(dato,clase){
+    //creo una etiqueta html desde js
     var td = document.createElement("td");
+    //creo una clase para mi etiqueta
     td.classList.add(clase);
     td.textContent = dato;
 
@@ -55,7 +59,16 @@ function construirTd(dato,clase){
 
 function validarPaciente(paciente){
     var errores=[];
-    if(!validarpeso(paciente.peso)){
+    if(paciente.nombre.length == 0){
+        errores.push("El nombren no puede estar vacio");
+    }if(paciente.peso.length == 0){
+        errores.push("El peso no puede estar vacio");
+    }if(paciente.altura.length == 0){
+        errores.push("La altura no puede estar vacia");
+    }if(paciente.gordura.length == 0){
+        errores.push("El %gordura no puede estar vacia");
+
+    }if(!validarpeso(paciente.peso)){
         errores.push("El peso es incorecto");
     }if(!validaraltura(paciente.altura)){
         errores.push("La altura es incorrecta");
@@ -66,7 +79,8 @@ function validarPaciente(paciente){
 function exhibirMensajesErrores(errores){
 
     var ul = document.querySelector("#mensajesError");
-
+    ul.innerHTML=""
+//el forEach es un loop que recorre automaticamente un array
     errores.forEach(function(error){
         var li = document.createElement("li");
         li.textContent = error;
