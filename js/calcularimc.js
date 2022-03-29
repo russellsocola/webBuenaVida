@@ -15,16 +15,16 @@ for(var i =0;i< pacientes.length ; i++){
     var infoimc = paciente.querySelector(".info-imc");
 
 
-    var pesovalido= true;
-    var alturavalida= true;
+    var pesovalido= validarpeso(peso);
+    var alturavalida= validaraltura(altura);
     
-    if ((peso<=0) || (peso>= 300)){
+    if (!pesovalido){
             console.log("peso incorrecto");
             pesovalido=false;
             infoimc.textContent= "peso incorrecto";
             paciente.classList.add("paciente-maluco");
     }
-    if ((altura<=0) || (altura>= 5)){
+    if (!alturavalida){
             console.log("peso incorrecto");
             alturavalida=false;
             infoimc.textContent= "altura incorrecto";
@@ -34,8 +34,24 @@ for(var i =0;i< pacientes.length ; i++){
             
             infoimc.textContent= calcularIMC(peso,altura);
     }
+    
     function calcularIMC(peso,altura){
         var imc = peso/(altura*altura);
         return imc.toFixed(2);
+    }
+}
+
+function validarpeso(peso){
+    if (peso>=0 && peso <500){
+        return true;
+    }else{
+        return false;
+    }
+}
+function validaraltura(altura){
+    if (altura>=0 && altura <3.00){
+        return true;
+    }else{
+        return false;
     }
 }
