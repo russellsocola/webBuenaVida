@@ -7,8 +7,10 @@ filtro.addEventListener("input", function(){
             var paciente = pacientes[i];
             var tdNombre =paciente.querySelector(".info-nombre");
             var nombre = tdNombre.textContent;
-            
-            if(nombre != this.value){
+            var expresion = new RegExp(this.value,"i");
+
+
+            if(!expresion.test(nombre)){
                 paciente.classList.add("invisible");
             }else{
                 paciente.classList.remove("invisible");
