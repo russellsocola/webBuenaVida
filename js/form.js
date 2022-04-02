@@ -5,7 +5,6 @@ button.addEventListener("click", function(event){
 
     var form = document.querySelector("#form-adicionar");
     var paciente = capturarDatosPaciente(form);
-    var pacienteTr = construirTr(paciente);
 
     var errores = validarPaciente(paciente);
 
@@ -14,13 +13,18 @@ button.addEventListener("click", function(event){
         return;
     }
     //validar paciente
-    var talba = document.querySelector("#tabla-pacientes");
-    talba.appendChild(pacienteTr);
+    adicionarPacienteEnLaTabla(paciente)
     form.reset();
     var mensajesErrorres= document.querySelector("#mensajesError");
     mensajesErrorres.innerHTML="";
 
 });
+
+function adicionarPacienteEnLaTabla(paciente){
+    var pacienteTr = construirTr(paciente);
+    var talba = document.querySelector("#tabla-pacientes");
+    talba.appendChild(pacienteTr);
+}
 
 function capturarDatosPaciente(form){
     //capturando datos del formulario
